@@ -35,7 +35,7 @@ class Nodes {
 }
 
 public class LowestCommonAncestor {
-	// Driver code
+// Driver code
 //    public static void main(String[] args) {
 //        LowestCommonAncestor tree = new LowestCommonAncestor();
 //        // Create Tree
