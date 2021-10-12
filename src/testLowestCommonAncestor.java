@@ -6,12 +6,30 @@ import java.util.List;
 import org.junit.Test;
 
 public class testLowestCommonAncestor {
+//  Lowest Common Ancestor 
+//
+//
+//	           Binary Tree 
+//
+//	                  4
+//			  |
+//	          +-------+-------+
+//	          |	          |
+//		 10               7
+//	          |               |
+//	      +---+---+       +---+---+
+//	      |       |       |       |
+//	      2       3       5       1
+//          +-+-+   +-+-+   +-+-+   +-+-+
+//          |   |   |   |   |   |   |   |
+//          8   9   6   14  12  15  11  16
+//       +--+
+//       |
+//     -17
+//
+//
 	LowestCommonAncestor tree;
 
-//	@Test
-//	public void test() {
-//		fail("Not yet implemented");
-//	}
 	
 	@Test
 	public void testNode() 
@@ -96,7 +114,20 @@ public class testLowestCommonAncestor {
 		assertEquals(-1,LCA.findLowestCommonAncestor(7, -1));
 		assertEquals(4,LCA.findLowestCommonAncestor(-17, 12));
 	}
-	
+//	
+//Binary Tree used for tesLCAContent underneath
+//
+//   	   0
+//	  	   |
+//	   +-------+-------+
+// |	     	   |
+// 1               2
+// |               |
+//+---+---+       +---+---+
+//|       |       |       |
+//3       4       5       6
+//
+//	
 	
 	@Test
 	//Tests the function findLCA 
