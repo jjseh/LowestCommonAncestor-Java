@@ -19,7 +19,6 @@
 //   
 //   
 //
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,42 +29,42 @@ class Nodes {
     Nodes left, right;
  
     Nodes(int value) {
-        data = value;
+        data = value; 
         left = right = null;
     }
 }
 
 public class LowestCommonAncestor {
 	// Driver code
-    public static void main(String[] args) {
-        LowestCommonAncestor tree = new LowestCommonAncestor();
-        // Create Tree
-        tree.root = new Nodes(4);
-        tree.root.left = new Nodes(10);
-        tree.root.right = new Nodes(7);
-        tree.root.left.left = new Nodes(2);
-        tree.root.left.right = new Nodes(3);
-        tree.root.right.left = new Nodes(5);
-        tree.root.right.right = new Nodes(1);
-        tree.root.left.left.left = new Nodes(8);
-        tree.root.left.left.right = new Nodes(9);
-        tree.root.left.right.left = new Nodes(6);
-        tree.root.left.right.right = new Nodes(14);
-        tree.root.right.left.left = new Nodes(12);
-        tree.root.right.left.right = new Nodes(15);
-        tree.root.right.right.left = new Nodes(11);
-        tree.root.right.right.right = new Nodes(16);
-
-        
-        // Test Lowest Common Ancestor
-        System.out.println("Lowest Common Ancestor of 8 and 9: " + tree.findLowestCommonAncestor(8,9));
-        System.out.println("Lowest Common Ancestor of 7 and 5: " + tree.findLowestCommonAncestor(7,5));
-        System.out.println("Lowest Common Ancestor of 11 and 16: " + tree.findLowestCommonAncestor(11,16));
-        System.out.println("Lowest Common Ancestor of 10 and 7: " + tree.findLowestCommonAncestor(10,7));
-        System.out.println("Lowest Common Ancestor of 12 and 15: " + tree.findLowestCommonAncestor(12,15));
-
-      
-    }
+//    public static void main(String[] args) {
+//        LowestCommonAncestor tree = new LowestCommonAncestor();
+//        // Create Tree
+//        tree.root = new Nodes(4);
+//        tree.root.left = new Nodes(10);
+//        tree.root.right = new Nodes(7);
+//        tree.root.left.left = new Nodes(2);
+//        tree.root.left.right = new Nodes(3);
+//        tree.root.right.left = new Nodes(5);
+//        tree.root.right.right = new Nodes(1);
+//        tree.root.left.left.left = new Nodes(8);
+//        tree.root.left.left.right = new Nodes(9);
+//        tree.root.left.right.left = new Nodes(6);
+//        tree.root.left.right.right = new Nodes(14);
+//        tree.root.right.left.left = new Nodes(12);
+//        tree.root.right.left.right = new Nodes(15);
+//        tree.root.right.right.left = new Nodes(11);
+//        tree.root.right.right.right = new Nodes(16);
+//
+//        
+//        // Test Lowest Common Ancestor
+//        System.out.println("Lowest Common Ancestor of 8 and 9: " + tree.findLowestCommonAncestor(8,9));
+//        System.out.println("Lowest Common Ancestor of 7 and 5: " + tree.findLowestCommonAncestor(7,5));
+//        System.out.println("Lowest Common Ancestor of 11 and 16: " + tree.findLowestCommonAncestor(11,16));
+//        System.out.println("Lowest Common Ancestor of 10 and 7: " + tree.findLowestCommonAncestor(10,7));
+//        System.out.println("Lowest Common Ancestor of 12 and 15: " + tree.findLowestCommonAncestor(12,15));
+//
+//      
+//    }
 	
 	Nodes root;
     private List<Integer> node1Path = new ArrayList<>();
@@ -107,7 +106,10 @@ public class LowestCommonAncestor {
         }
         return node1Path.get(i-1);
     }
-
+    
+    // Finds path between nodes 
+    // Store path in vector path[]
+    // If path exists return true, else if path does not exist return false
     private boolean findNodePath(Nodes root, int n, List<Integer> path) {
     	
         // base case
@@ -115,6 +117,8 @@ public class LowestCommonAncestor {
             return false;
         }
         
+        // Store node
+        // Remove node if not in path
         path.add(root.data);
  
         if (root.data == n) {
