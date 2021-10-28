@@ -8,7 +8,7 @@ public class DAGLca {
 
 	private final int vertex;
 	private final ArrayList<Integer>[] adjVertex;
-	private final ArrayList<Integer>[] reverseAdjVertex;			
+	private final ArrayList<Integer>[] reverseAdjVertex;			//Need for finding the LCA
 
 	//DAG constructor
 	public DAGLca(int vertex) {
@@ -24,7 +24,7 @@ public class DAGLca {
 		}
 	}
 
-	
+	// On directed graph, create depth first search
 	private class DFSDirectedGraph {
 		private boolean[] visited;
 		private boolean[] revVisited;
@@ -35,7 +35,8 @@ public class DAGLca {
 			revVisited = new boolean[G.numberOfVertx()];
 			depthFirstSearch(G, s);
 		}
-
+		
+		// Depth first search on graph
 		private void depthFirstSearch(DAGLca G, int v)
 		{
 			visited[v] = true;
@@ -46,6 +47,7 @@ public class DAGLca {
 			}
 		}
 		
+		// Reversed depth first search to find all parent
 		private void reverseDfs(DAGLca Graph, int vertex) {
 			revVisited[vertex] = true; 
 			for (int w : Graph.reverseAdj(vertex)) {
@@ -63,13 +65,19 @@ public class DAGLca {
 		}
 	}
 
-	
+	// Edge added from vertex u to vertex v if conditions match
+	// Return true if edge is added
+	// acyclic - doesn't create a cycle by adding edges
 	public boolean addEdge(int u, int v) {
 
+		// Check vertices are not less than 0 or greater than the number of vertices in DAG
 		if(u >= this.vertex || v >= this.vertex || u < 0 || v < 0) {
 			return false;
 		}
 		
+		// Check no self loops - keep vertices different
+		// Check no paths exist between v and u
+		// Check u does not have already an edge pointing to v.
 		if(u != v && !containsNodePath(v, u) && !adjVertex[u].contains(v)) {
 			adjVertex[u].add(v);
 			reverseAdjVertex[v].add(u);
@@ -85,23 +93,28 @@ public class DAGLca {
 		return vertex;
 	}
 
+	// Return vertices pointing away from vertex v
 	public ArrayList<Integer> adjVertex(int v) { 
 		return adjVertex[v];
 	}
 
+	// Return reversed vertices pointing away from vertex v
 	public ArrayList<Integer> reverseAdj(int v) {
 		return reverseAdjVertex[v];
 	}
 
+	// Check path exists between two nodes
 	public boolean containsNodePath(int node1, int node2) {
 		DFSDirectedGraph dfs = new DFSDirectedGraph(this, node1);
 		return dfs.marked(node2);
 	}
 
+	// Lowest Common Ancestor 
 	public ArrayList<Integer> LCA(int node1, int node2) {
 		ArrayList<Integer> lowestCommonAncestor = new ArrayList<Integer>();
 		int maxDistance = Integer.MAX_VALUE;
 		
+		//return empty if invalid input
 		if(node1 == node2 || node1 >= this.vertex || node2 >= this.vertex || node1 < 0 || node2 < 0) {
 			return lowestCommonAncestor; 
 		} 
